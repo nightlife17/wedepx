@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WEDEPX_DB", "WEDEPX_DB\WEDEPX_DB.csproj", "{5F8BB4A3-704C-4391-8D4F-DB7C94FCB130}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WEDEPX", "WEDEPX\WEDEPX.csproj", "{769D97D8-7321-4DFC-B4CD-8ABF7484345F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WEDEPX_API", "WEDEPX_API\WEDEPX_API.csproj", "{751B22D3-680F-40E3-AF8D-D47A50EA01AE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5F8BB4A3-704C-4391-8D4F-DB7C94FCB130}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F8BB4A3-704C-4391-8D4F-DB7C94FCB130}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F8BB4A3-704C-4391-8D4F-DB7C94FCB130}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F8BB4A3-704C-4391-8D4F-DB7C94FCB130}.Release|Any CPU.Build.0 = Release|Any CPU
+		{769D97D8-7321-4DFC-B4CD-8ABF7484345F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{769D97D8-7321-4DFC-B4CD-8ABF7484345F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{769D97D8-7321-4DFC-B4CD-8ABF7484345F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{769D97D8-7321-4DFC-B4CD-8ABF7484345F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{751B22D3-680F-40E3-AF8D-D47A50EA01AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{751B22D3-680F-40E3-AF8D-D47A50EA01AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{751B22D3-680F-40E3-AF8D-D47A50EA01AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{751B22D3-680F-40E3-AF8D-D47A50EA01AE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {86CFDE5E-7304-4190-A89C-E645BC7871DA}
+	EndGlobalSection
+EndGlobal

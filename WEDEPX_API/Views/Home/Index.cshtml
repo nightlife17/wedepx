@@ -1,0 +1,167 @@
+﻿<div id="App">
+    <div class="container">
+        <div class="card mt-4">
+            <div class="card-body">
+                <form>
+                    <div class="row">
+                        @*<div class="col-md-4">
+                                <label>รหัส</label>
+                                <input type="number" class="form-control" maxlength="6" v-model="emp.EMP_CODE">
+                            </div>*@
+                        <div class="col-md-4">
+                            <label>วันเดือนปีเกิด</label>
+                            <input type="date" class="form-control" v-model="emp.BIRTH_DAY" required>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-4">
+                            <label>ชื่อ</label>
+                            <input type="text" class="form-control" v-model="emp.FIRST_NAME" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label>นามสกุล</label>
+                            <input type="text" class="form-control" v-model="emp.LAST_NAME" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label>ชื่อเล่น</label>
+                            <input type="text" class="form-control" v-model="emp.NICK_NAME" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>รูป</label>
+                            <input type="file" class="form-control" v-model="emp.PHOTO_PATH" v-on:change="fileChange($event.target.files)" required>
+                        </div>
+
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col-md-2">
+
+                            <button type="submit" class="btn btn-success" v-on:click="Save">Save</button>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="card mt-4">
+            <div class="card-body">
+                <div class="row ">
+                    <div class="col-md-12">
+                        <div class="col-md-ๅจ">
+                            <table width="100%" class="table table-bordered">
+                                <thead><tr>
+                                    <th>รหัส</th>
+                                    <th>วันเดือนปีเกิด</th>
+                                    <th>ชื่อ</th>
+                                    <th>นามสกุล</th>
+                                    <th>ชื่อเล่น</th>
+                                    <th></th>
+                                    </tr></thead>
+                                <tbody>
+                                    <tr v-for="data in Model">
+                                        <td>
+                                            {{data.EMP_CODE }}
+                                        </td>
+                                        <td>
+                                            {{ data.BIRTH_DAY }}
+                                        </td>
+                                        <td>
+                                            {{ data.FIRST_NAME }}
+                                        </td>
+                                        <td>
+                                            {{ data.LAST_NAME }}
+                                        </td>
+                                        <td>
+                                            {{ data.NICK_NAME }}
+                                        </td>
+                                        <td>
+                                        <button type="button" class="btn btn-success" v-on:click="Generate(data.EMP_CODE)">Generate</button>
+                                        @*<button type="button" class="btn btn-info" v-on:click="edit(data.EMP_CODE)">แก้ไข</button>*@
+                                        <button type="button" class="btn btn-danger" v-on:click="Delete(data.EMP_CODE)">ลบ</button>
+                                        </td>
+                                    </tr>
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script>
+    
+        var App = new Vue({
+            el: "#App",
+            data: {
+                Model: [],
+                MasterData: [],
+                emp: {
+                    EMP_CODE: "",
+                    BIRTH_DAY: "",
+                    FIRST_NAME: "",
+                    LAST_NAME: "",
+                    NICK_NAME: "",
+                    PHOTO_PATH: "",
+                },
+                Upload: new FormData()
+                ,
+            },
+            methods: {
+                async GetValue() {
+                    await axios.get("/Get", {}).then((res) => {
+                        if (res.data.status == "ok") {
+                            this.MasterData = res.data.data;
+                            for (var u of res.data.data) {
+                                var d1 = new Date(u.BIRTH_DAY);
+                                u.BIRTH_DAY = d1.getDate() + "/" + d1.getMonth() + 1 + "/" + d1.getFullYear();
+
+                            }
+                            this.Model = res.data.data
+                        }
+                    });
+                },
+                Save() {
+                    this.Upload.set('BIRTH_DAY', this.emp.BIRTH_DAY);
+                    this.Upload.set('FIRST_NAME', this.emp.FIRST_NAME);
+                    this.Upload.set('LAST_NAME', this.emp.LAST_NAME);
+                    this.Upload.set('NICK_NAME', this.emp.NICK_NAME);
+                    axios.post("/Save", this.Upload).then((res) => {
+                        this.GetValue();
+                    });
+                },
+                fileChange(fileList) {
+                    this.Upload = new FormData();
+                    this.Upload.set("PHOTO_PATH", fileList[0], fileList[0].name);
+                },
+                Delete(EMP_CODE) {
+
+                 
+                    axios.get("/Del/" + EMP_CODE).then((res) => {
+                        this.GetValue();
+                    });
+                },
+                async  Generate(EMP_CODE) {
+                    //await axios.get("/Gen/" + EMP_CODE, ).then((res) => {
+
+                    //});
+                    window.location = "/Gen/" + EMP_CODE;
+                }
+
+            },
+
+
+        });
+        $(document).ready(function () {
+
+            App.GetValue();
+        });
+
+    </script>
+}
